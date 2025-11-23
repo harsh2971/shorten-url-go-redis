@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  api:
+    build: api
+    ports:
+      - "3300:3300"
+    environment:
+      - APP_PORT=:3300
+      - DB_ADDR=db:6379
+      - DB_PASS=
+      - DOMAIN=http://localhost:3300
+      - API_QUOTA=10
+    depends_on:
+      - db
+
+  db:
+    build: db
+    ports:
+      - "6379:6379"
+    volumes:
+      - .data:/data
+      
